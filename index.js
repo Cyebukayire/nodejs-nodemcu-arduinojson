@@ -18,6 +18,11 @@ app.get("/", async (req, res) => {
     });
   });
 });
+
+app.get("/message", async (req, res) => {
+  res.send("Welcome To SmartHinga");
+});
+
 app.post("/", async (req, res) => {
   fs.readFile(DB_PATH, "utf-8", (err, jsonString) => {
     if (err) return console.log("Error in reading from db");
@@ -28,6 +33,7 @@ app.post("/", async (req, res) => {
       humidity: body.humidity,
       timestamp: new Date(),
     };
+
     valuesArr.push(obj);
     fs.writeFile(DB_PATH, JSON.stringify(valuesArr), (err) => {
       if (err) return console.log("Error in updating db");
